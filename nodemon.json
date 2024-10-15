@@ -1,0 +1,5 @@
+{
+    "watch": ["srv"],
+    "ext": "cjs",
+    "exec": "node run/srvIndex.cjs"
+}
