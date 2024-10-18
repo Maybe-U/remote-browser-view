@@ -1,6 +1,6 @@
 {
   "name": "remote-browser-view",
-  "version": "0.1.0-beta.1",
+  "version": "0.1.0-beta.2",
   "description": "A library for executing actions in a remote browser and viewing/replaying them locally.",
   "main": "dist/node/index.cjs",
   "browser": "dist/browser/index.js",
@@ -13,6 +13,7 @@
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "files": [
+    "assets",
     "dist",
     "README.md"
   ],
@@ -28,7 +29,6 @@
     "live-server": "^1.2.2",
     "loglevel": "^1.9.2",
     "playwright": "^1.46.1",
-    "remote-browser-view": "^0.1.0-beta.1",
     "rrweb": "^2.0.0-alpha.4",
     "uuid": "^8.3.2"
   },
@@ -51,6 +51,7 @@
     "html-webpack-plugin": "^5.6.0",
     "nodemon": "^3.1.4",
     "prettier": "^3.3.3",
+    "remote-browser-view": "^0.1.0-beta.2",
     "rollup": "^2.79.1",
     "rollup-plugin-copy": "^3.5.0",
     "rollup-plugin-livereload": "^2.0.5",
