@@ -2,8 +2,8 @@
   "name": "remote-browser-view",
   "version": "0.1.0-beta.1",
   "description": "A library for executing actions in a remote browser and viewing/replaying them locally.",
-  "main": "srv/index.cjs",
-  "browser": "web/index.js",
+  "main": "dist/node/index.cjs",
+  "browser": "dist/browser/index.js",
   "scripts": {
     "build": "npx rollup -c",
     "serve": "npx live-server es --port=8088",
@@ -28,6 +28,7 @@
     "live-server": "^1.2.2",
     "loglevel": "^1.9.2",
     "playwright": "^1.46.1",
+    "remote-browser-view": "^0.1.0-beta.1",
     "rrweb": "^2.0.0-alpha.4",
     "uuid": "^8.3.2"
   },

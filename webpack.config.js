@@ -9,11 +9,11 @@ const isProduction = process.env.NODE_ENV == 'production';
 
 const config = {
     entry: {
-        web: './run/webIndex.js',
+        web: './test/webIndex.js',
       },
     output: {
         filename: '[name].js',
-        path: path.resolve(__dirname, 'dist'),
+        path: path.resolve(__dirname, 'test/dist'),
         // libraryTarget: 'commonjs2' // 适用于 Node.js
     },
     devServer: {
@@ -22,7 +22,7 @@ const config = {
     },
     plugins: [
         new HtmlWebpackPlugin({
-            template: 'run/index.html',
+            template: 'test/index.html',
         }),
         // Add your plugins here
         // Learn more about plugins from https://webpack.js.org/configuration/plugins/

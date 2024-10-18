@@ -45,8 +45,8 @@ export default [
             commonjs(),
             copy({
               targets: [
-                { src: 'src/server/rrweb.min.js', dest: 'srv/' },
-                { src: 'src/server/InjectTargetRRWeb.js', dest: 'srv/' }
+                { src: 'src/server/rrweb.min.js', dest: 'dist/node/' },
+                { src: 'src/server/InjectTargetRRWeb.js', dest: 'dist/node/' }
                 // 添加其他文件的复制配置
               ]
             })
