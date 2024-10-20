@@ -5,6 +5,11 @@
 如捕获用户在www.baidu.com登入的过程，并获取登入后的请求头或者cookie，在适合的时机回放操作过程，但是www.baidu.com实际是在后端的playwright中执行。
 # 演示
 ![Play](./assets/play.gif "Play ")
+
+# 重放
+将演示中用户操作的动作数据来回放，数据通过getWebInteractionActions方法获取。
+![Replay](./assets/replay.gif "Replay")
+
 # 安装
 ```js
 npm install remote-browser-view
@@ -24,7 +29,7 @@ let start = new server.ServerBrowser(
 start.start()
 
 ```
-## 前端使用
+## 前端连接后端服务
 ```
 import WebReplayManager from 'remote-browser-view/dist/browser'
 let start = new WebReplayManager({
@@ -35,6 +40,15 @@ let start = new WebReplayManager({
 })
 start.start() //开始渲染url
 
+回调函数，优化交互
+页面渲染中的回调函数
+start.renderLoading = () => {
+
+}
+渲染结束的回调函数
+start.renderFinish = () => {
+
+}
 
 页面操作完成之后：
 
@@ -46,5 +60,16 @@ console.log("Cookies:",start.getServerBrowserCookies())
 console.log("Connections:",start.getServerBrowserConnections(["fetch","xhr","document"]))
 
 ```
+## node根据执行动作回放
+```
+let server = require("../dist/node/index.cjs")
+let actions = require("./test.action.json")
 
+let replayAction = server.ReplayActions
+
+let requests = replayAction(actions,"https://www.airdroid.cn/",false)
+requests.then(connections => {
+    console.log(connections)
+})
+```
 

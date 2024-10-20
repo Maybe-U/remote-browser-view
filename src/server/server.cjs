@@ -152,6 +152,7 @@ class ServerBrowser {
         proxy: this.playwrightProxy 
       });
       const page = await browser.newPage();
+      page.setDefaultTimeout(5000); 
 
       page.on('popup', async (popup) => {
           // 获取新标签页的URL
@@ -164,17 +165,22 @@ class ServerBrowser {
       });
 
       let requests = []
-      page.on('request', async request => {
-        try {
+      const requestListener = async request => {
+          try {
             const url = request.url();
             const method = request.method();
             const resourceType = request.resourceType();
+            if (resourceType == "image"){
+                return
+            }
+            console.log(url,method,resourceType);
             const headers = await request.allHeaders(); // Get request headers
-            requests.push({url,method,resourceType,headers})
+            requests.push({url,method,resourceType,headers});
           } catch (error) {
-            console.log(error)
+            console.log(error);
           }
-      });
+      };
+      page.on('request', requestListener);
 
       // 导航到目标页面
       await page.goto(target);
@@ -192,6 +198,11 @@ class ServerBrowser {
       console.log("action play done waitForURL")
       //等5秒在关闭
       await sleep(15000)
+      page.off('request', requestListener);
+      await page.waitForEvent('requestfinished', { timeout: 15000 });
+
+      await page.close()
+      
       // 关闭浏览器
       await browser.close();
     
@@ -321,6 +332,68 @@ function sleep(ms) {
 }
 
 
+async function ReplayActions (actions,target,headless) {
+  let requests = []
+  try {
+    // 启动浏览器
+    const browser = await chromium.launch({ 
+     headless: headless,
+     devtools: false,  // 启用开发者工具
+   });
+   const page = await browser.newPage();
+   page.on('popup', async (popup) => {
+       // 获取新标签页的URL
+       const url = popup.url();
+       // 让当前页面导航到新标签页的URL
+       await page.goto(url);
+       await page.waitForLoadState('networkidle')
+       // 关闭新标签页
+       await popup.close();
+   });
+
+   const requestListener = async request => {
+        const url = request.url();
+        const method = request.method();
+        const resourceType = request.resourceType();
+        if (resourceType == "image"){
+            return
+        }
+       try {
+         const headers = await request.allHeaders(); // Get request headers
+         requests.push({url,method,resourceType,headers});
+       } catch (error) {
+         console.log(error);
+         console.error("error:",url,method,resourceType);
+       }
+   };
+   page.on('requestfinished', requestListener);
+
+   // 导航到目标页面
+   await page.goto(target);
+   //等待没有网络请求了 在执行动作
+   await page.waitForLoadState('load');
+   await page.waitForLoadState('networkidle');
+   
+   let player = new EventReplayer()
+   // 执行 JSON 文件中的动作
+   for (const action of actions) {
+     await player.replay(page,action)
+     await page.waitForTimeout(500);
+     await page.waitForLoadState('load');
+   }
+   console.log("action play done waitForURL")
+   //等5秒在关闭
+   await sleep(10000)
+   await page.close()
+   // 关闭浏览器
+   await browser.close();
+ } catch (error) {
+   console.log(error)
+ }
+ return requests
+}
+
+module.exports.ReplayActions = ReplayActions
 module.exports.ServerBrowser = ServerBrowser
   
 

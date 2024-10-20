@@ -1,5 +1,66 @@
 [
    {
-    
-   } 
+       "select": "div#public-header > div.right-box > div.btn-box.right-btn-box > div.sign-box > a.header-btn.header-btn-sign.j-to-header-ga-click:nth-child(1)[data-gatype=\"Signin\"]",
+       "type": "focus",
+       "x": 0,
+       "y": 0,
+       "timestamp": 1729244692931,
+       "fromIframe": true
+   },
+   {
+       "select": "div#public-header > div.right-box > div.btn-box.right-btn-box > div.sign-box > a.header-btn.header-btn-sign.j-to-header-ga-click[data-gatype=\"Signin\"] > span.btn-txt:nth-child(1)",
+       "type": "click",
+       "x": 1215,
+       "y": 22,
+       "timestamp": 1729244692989,
+       "fromIframe": true
+   },
+   {
+       "select": "#email",
+       "type": "focus",
+       "x": 0,
+       "y": 0,
+       "timestamp": 1729244694452,
+       "fromIframe": true
+   },
+   {
+       "select": "#email",
+       "type": "click",
+       "x": 866,
+       "y": 322,
+       "timestamp": 1729244694489,
+       "fromIframe": true
+   },
+   {
+       "select": "#email",
+       "type": "input",
+       "value": "admin@qq.com",
+       "id": "email",
+       "timestamp": 1729244698087,
+       "fromIframe": true
+   },
+   {
+       "select": "#password",
+       "type": "input",
+       "value": "aasassas",
+       "id": "password",
+       "timestamp": 1729244700050,
+       "fromIframe": true
+   },
+   {
+       "select": "#btn_signin",
+       "type": "focus",
+       "x": 0,
+       "y": 0,
+       "timestamp": 1729244701141,
+       "fromIframe": true
+   },
+   {
+       "select": "#btn_signin",
+       "type": "click",
+       "x": 958,
+       "y": 485,
+       "timestamp": 1729244701210,
+       "fromIframe": true
+   }
 ]
