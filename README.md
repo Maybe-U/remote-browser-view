@@ -73,3 +73,14 @@ requests.then(connections => {
 })
 ```
 
+## 联系
+Maintained by [SphinxH](https://blog.maybeu.top/). 
+
+## FAQ
+-  使用过程可能还会其他bug，欢迎提交issue
+## 参考资料
+- [rrweb.io](https://www.rrweb.io/)
+
+## License
+This project is licensed under the MIT License - 
+
