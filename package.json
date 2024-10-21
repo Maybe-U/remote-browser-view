@@ -23,6 +23,10 @@
     "view",
     "replay"
   ],
+  "repository": {
+    "type": "git",
+    "url": "git@github.com:Maybe-U/remote-browser-view.git"
+  },
   "author": "Maybe",
   "license": "MIT",
   "dependencies": {
